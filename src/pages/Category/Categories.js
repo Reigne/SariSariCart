@@ -3,22 +3,58 @@ import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 
 import Sidebar from "../../components/Navbar/Sidebar";
-import { Button, Form, Input, InputNumber, Modal, Radio, Upload } from "antd";
+import {
+  Button,
+  Form,
+  Input,
+  InputNumber,
+  Modal,
+  Radio,
+  Upload,
+  message,
+} from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { UploadOutlined } from "@ant-design/icons";
-import "primereact/resources/themes/lara-light-indigo/theme.css";
+import {
+  createCategory,
+  allCategories,
+  singleCategory,
+  updateCategory,
+  clearErrors,
+  resetUpdateCategory,
+} from "../../actions/categoryActions";
+import { CREATE_CATEGORY_RESET } from "../../constants/categoryConstants";
+
 export default function Categories() {
+  const dispatch = useDispatch();
+
   const [name, setName] = useState("");
   const [image, setImage] = useState(null);
+  const [errors, setErrors] = useState({});
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const { loading, error, success } = useSelector(
+    (state) => state.createCategory
+  );
+
+  const validateForm = () => {
+    let errors = {};
+
+    if (!name) errors.name = "Category name is required";
+
+    setErrors(errors);
+
+    return Object.keys(errors).length === 0;
+  };
 
   const showModal = () => {
     setIsModalOpen(true);
   };
 
   const handleOk = () => {
-    setIsModalOpen(false);
+    // setIsModalOpen(false);
+    createHandler();
   };
 
   const handleCancel = () => {
@@ -42,6 +78,38 @@ export default function Categories() {
         reader.readAsDataURL(file);
       }
     },
+  };
+
+  useEffect(() => {
+    if (success) {
+      message.success("Category created successfully");
+      dispatch({ type: CREATE_CATEGORY_RESET });
+      dispatch(allCategories());
+      setIsModalOpen(false);
+      setName("");
+      setImage("");
+    }
+
+    if (error) {
+      message.error(error);
+      dispatch(clearErrors());
+    }
+  }, [success, error, dispatch]);
+
+  const createHandler = () => {
+    if (!validateForm()) {
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("name", name);
+
+    if (image) {
+      formData.append("image", image);
+      console.log(formData);
+    }
+
+    dispatch(createCategory(formData));
   };
 
   return (
@@ -73,7 +141,20 @@ export default function Categories() {
                   <p>
                     Name <span className="text-red-500">*</span>
                   </p>
-                  <Input size="large" placeholder="Category Name" />
+                  <Input
+                    size="large"
+                    type="text"
+                    name="name"
+                    variant="filled"
+                    placeholder="Category Name"
+                    onChange={(e) => setName(e.target.value)}
+                    value={name}
+                    status={errors.name ? "error" : null}
+                  />
+
+                  {errors.name && (
+                    <span className="text-red-500 text-sm">{errors.name}</span>
+                  )}
                 </div>
 
                 <div className="space-y-1">
