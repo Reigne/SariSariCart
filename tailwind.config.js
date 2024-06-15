@@ -2,7 +2,11 @@
 module.exports = {
   content: ["./src/**/*.{html,js}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ["Roboto", "Arial", "sans-serif"], // Replace with your custom font stack
+      },
+    },
   },
   plugins: [],
-}
+};
