@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 
 import "./index.css";
 import App from "./App";
-// import store from "./store";
+import store from "./store";
 import reportWebVitals from "./reportWebVitals";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -13,10 +13,10 @@ import "react-toastify/dist/ReactToastify.css";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-  // <Provider>
-  <BrowserRouter>
-    <ToastContainer />
-    <App />
-  </BrowserRouter>
-  // </Provider>
+  <Provider store={store}>
+    <BrowserRouter>
+      <ToastContainer />
+      <App />
+    </BrowserRouter>
+  </Provider>
 );
