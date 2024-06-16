@@ -3,27 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 
 import Sidebar from "../../components/Navbar/Sidebar";
-import {
-  Button,
-  Form,
-  Input,
-  InputNumber,
-  Modal,
-  Radio,
-  Upload,
-  message,
-} from "antd";
-import TextArea from "antd/es/input/TextArea";
+import { Button, Input, Modal, Upload, message } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import {
   createCategory,
   allCategories,
-  singleCategory,
-  updateCategory,
   clearErrors,
-  resetUpdateCategory,
 } from "../../actions/categoryActions";
 import { CREATE_CATEGORY_RESET } from "../../constants/categoryConstants";
+import CategoryList from "./CategoryList";
 
 export default function Categories() {
   const dispatch = useDispatch();
@@ -31,12 +19,21 @@ export default function Categories() {
   const [name, setName] = useState("");
   const [image, setImage] = useState(null);
   const [errors, setErrors] = useState({});
-
+  const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [fileList, setFileList] = useState([]);
 
-  const { loading, error, success } = useSelector(
-    (state) => state.createCategory
-  );
+  const {
+    error: categoryError,
+    success: categorySuccess,
+    categories,
+  } = useSelector((state) => state.categories);
+
+  const {
+    loading: createLoading,
+    error: createError,
+    success: createSuccess,
+  } = useSelector((state) => state.createCategory);
 
   const validateForm = () => {
     let errors = {};
@@ -53,22 +50,40 @@ export default function Categories() {
   };
 
   const handleOk = () => {
-    // setIsModalOpen(false);
     createHandler();
   };
 
   const handleCancel = () => {
     setIsModalOpen(false);
+    // Reset image state
+    setImage(null);
+    // Clear form errors
+    setErrors({});
+    // Clear name field
+    setName("");
+    // setFileList([]);
   };
 
   const fileProps = {
     name: "image",
     multiple: false,
     listType: "picture",
+    // fileList,
+    // onRemove: (file) => {
+    //   const index = fileList.indexOf(file);
+    //   const newFileList = fileList.slice();
+    //   newFileList.splice(index, 1);
+    //   setFileList(newFileList);
+    // },
+    // beforeUpload: (file) => {
+    //   setFileList([...fileList, file]);
+    //   return false;
+    // },
     beforeUpload: () => false,
     onChange: (info) => {
-      if (info.file.status !== "uploading") {
-        const file = info.file;
+      const file = info.file.originFileObj; // Get the actual File/Blob object
+
+      if (file) {
         const reader = new FileReader();
 
         reader.onload = (e) => {
@@ -81,20 +96,30 @@ export default function Categories() {
   };
 
   useEffect(() => {
-    if (success) {
+    dispatch(allCategories());
+
+    if (createSuccess) {
       message.success("Category created successfully");
       dispatch({ type: CREATE_CATEGORY_RESET });
       dispatch(allCategories());
+      setLoading(false);
       setIsModalOpen(false);
+
+      // Reset image state
+      setImage(null);
+      // Clear form errors
+      setErrors({});
+      // Clear name field
       setName("");
-      setImage("");
+      // setFileList([]);
     }
 
-    if (error) {
-      message.error(error);
+    if (createError) {
+      message.error(createError);
       dispatch(clearErrors());
+      setLoading(false);
     }
-  }, [success, error, dispatch]);
+  }, [createSuccess, createError, dispatch]);
 
   const createHandler = () => {
     if (!validateForm()) {
@@ -106,9 +131,9 @@ export default function Categories() {
 
     if (image) {
       formData.append("image", image);
-      console.log(formData);
     }
 
+    setLoading(true);
     dispatch(createCategory(formData));
   };
 
@@ -123,18 +148,16 @@ export default function Categories() {
           <div className="flex justify-between items-center">
             <p className="text-2xl">Categories</p>
 
-            <Button
-              className="rounded bg-green-500 py-2 px-4 text-sm text-white data-[hover]:bg-green-400 data-[active]:bg-green-600"
-              onClick={() => showModal()}
-            >
+            <Button type="primary" onClick={() => showModal()}>
               Create Category
             </Button>
 
             <Modal
               title="Create New Category"
-              open={isModalOpen}
+              visible={isModalOpen}
               onOk={handleOk}
               onCancel={handleCancel}
+              confirmLoading={loading}
             >
               <div className="space-y-3 py-2">
                 <div className="space-y-1">
@@ -170,7 +193,9 @@ export default function Categories() {
             </Modal>
           </div>
 
-          <div></div>
+          <div>
+            <CategoryList categories={categories} />
+          </div>
         </div>
       </div>
     </div>
