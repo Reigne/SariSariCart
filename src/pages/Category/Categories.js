@@ -153,7 +153,7 @@ export default function Categories() {
             <p className="text-2xl">Categories</p>
 
             <Button type="primary" onClick={() => showModal()}>
-              Create Category
+              + Create Category
             </Button>
 
             <Modal
