@@ -16,7 +16,7 @@ import { PiUsersThree } from "react-icons/pi";
 
 export default function Sidebar() {
   return (
-    <div className="min-h-screen w-full max-w-[20rem] p-8 bg-white sticky top-0">
+    <div className="min-h-screen w-full min-w-[20rem] p-8 bg-white sticky top-0">
       <div className="flex items-center gap-4  rounded-lg">
         <div className="flex flex-col">
           <div className="flex items-center flex-shrink-0 gap-3">
@@ -37,7 +37,7 @@ export default function Sidebar() {
           <Divider />
 
           <div className="space-y-4">
-            <div className="hover:bg-green-100 py-2 px-3 rounded cursor-pointer w-full flex flex-1 flex-row justify-between items-center">
+            <div className="hover:bg-green-500 hover:text-white py-2 px-3 rounded cursor-pointer w-full flex flex-1 flex-row justify-between items-center">
               <div className="flex items-center gap-4">
                 <HiOutlinePresentationChartBar color="#0f172a" size={20} />
 
@@ -49,23 +49,23 @@ export default function Sidebar() {
               Product Management
             </Divider>
 
-            <div className="hover:bg-green-100 py-2 px-3 rounded cursor-pointer w-full flex flex-1 flex-row justify-between items-center">
+            <a className="hover:bg-green-500 hover:text-white py-2 px-3 rounded cursor-pointer w-full flex flex-1 flex-row justify-between items-center" href="/products">
               <div className="flex items-center gap-4">
                 <BsBoxSeam color="#0f172a" size={20} />
 
                 <span className="">Products</span>
               </div>
-            </div>
+            </a>
 
-            <div className="hover:bg-green-100 py-2 px-3 rounded cursor-pointer w-full flex flex-1 flex-row justify-between items-center">
+            <a className="hover:bg-green-500 hover:text-white py-2 px-3 rounded cursor-pointer w-full flex flex-1 flex-row justify-between items-center" href="/categories">
               <div className="flex items-center gap-4">
                 <TbCategory2 color="#0f172a" size={20} />
 
                 <span className="">Categories</span>
               </div>
-            </div>
+            </a>
 
-            <div className="hover:bg-green-100 py-2 px-3 rounded cursor-pointer w-full flex flex-1 flex-row justify-between items-center">
+            <div className="hover:bg-green-500 hover:text-white py-2 px-3 rounded cursor-pointer w-full flex flex-1 flex-row justify-between items-center">
               <div className="flex items-center gap-4">
                 <LiaTruckLoadingSolid color="#0f172a" size={20} />
 
@@ -73,7 +73,7 @@ export default function Sidebar() {
               </div>
             </div>
 
-            <div className="hover:bg-green-100 py-2 px-3 rounded cursor-pointer w-full flex flex-1 flex-row justify-between items-center">
+            <div className="hover:bg-green-500 hover:text-white py-2 px-3 rounded cursor-pointer w-full flex flex-1 flex-row justify-between items-center">
               <div className="flex items-center gap-4">
                 <FaRegStar color="#0f172a" size={20} />
 
@@ -85,7 +85,7 @@ export default function Sidebar() {
               User Management
             </Divider>
 
-            <div className="hover:bg-green-100 py-2 px-3 rounded cursor-pointer w-full flex flex-1 flex-row justify-between items-center">
+            <div className="hover:bg-green-500 hover:text-white py-2 px-3 rounded cursor-pointer w-full flex flex-1 flex-row justify-between items-center">
               <div className="flex items-center gap-4">
                 <PiUsersThree color="#0f172a" size={20} />
 
