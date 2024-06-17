@@ -61,29 +61,29 @@ export default function Categories() {
     setErrors({});
     // Clear name field
     setName("");
-    // setFileList([]);
+    setFileList([]);
   };
 
   const fileProps = {
     name: "image",
     multiple: false,
     listType: "picture",
-    // fileList,
-    // onRemove: (file) => {
-    //   const index = fileList.indexOf(file);
-    //   const newFileList = fileList.slice();
-    //   newFileList.splice(index, 1);
-    //   setFileList(newFileList);
-    // },
-    // beforeUpload: (file) => {
-    //   setFileList([...fileList, file]);
-    //   return false;
-    // },
+    fileList,
+    onRemove: (file) => {
+      const index = fileList.indexOf(file);
+      const newFileList = fileList.slice();
+      newFileList.splice(index, 1);
+      setFileList(newFileList);
+    },
     beforeUpload: () => false,
     onChange: (info) => {
-      const file = info.file.originFileObj; // Get the actual File/Blob object
+      console.log(info, "info onchange")
 
+      const file = info.fileList[0]?.originFileObj; // Get the actual File/Blob object
+
+      console.log(file, "file onchange")
       if (file) {
+
         const reader = new FileReader();
 
         reader.onload = (e) => {
@@ -91,6 +91,8 @@ export default function Categories() {
         };
 
         reader.readAsDataURL(file);
+
+        setFileList(info.fileList); // Update fileList state
       }
     },
   };
@@ -111,7 +113,7 @@ export default function Categories() {
       setErrors({});
       // Clear name field
       setName("");
-      // setFileList([]);
+      setFileList([]);
     }
 
     if (createError) {
@@ -125,6 +127,8 @@ export default function Categories() {
     if (!validateForm()) {
       return;
     }
+
+    console.log("image create", image);
 
     const formData = new FormData();
     formData.append("name", name);

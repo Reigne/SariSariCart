@@ -94,6 +94,7 @@ import {
           ...state,
           loading: false,
           category: action.payload,
+          success: true,
         };
       case SINGLE_CATEGORY_FAIL:
         return {
@@ -122,8 +123,8 @@ import {
         return {
           ...state,
           loading: false,
-          updateSuccess: action.payload.success,
-          category: action.payload.categories,
+          updateSuccess: true,
+          category: action.payload.category,
         };
       case UPDATE_CATEGORY_FAIL:
         return {
