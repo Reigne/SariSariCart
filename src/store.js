@@ -14,7 +14,20 @@ import {
   deleteCategoryReducer,
 } from "./reducers/categoryReducers";
 
+import {
+  createProductReducer,
+  productsReducer,
+  singleProductReducer,
+  updateProductReducer,
+  deleteProductReducer,
+} from "./reducers/productReducers";
+
 const reducer = combineReducers({
+  products: productsReducer,
+  createProduct: createProductReducer,
+  singleProduct: singleProductReducer,
+  updateProduct: updateProductReducer,
+  deleteProduct: deleteProductReducer,
   createCategory: createCategoryReducer,
   categories: categoriesReducer,
   singleCategory: singleCategoryReducer,
