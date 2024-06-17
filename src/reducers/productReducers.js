@@ -94,6 +94,7 @@ import {
           ...state,
           loading: false,
           product: action.payload,
+          success: true,
         };
       case SINGLE_PRODUCT_FAIL:
         return {
@@ -122,8 +123,8 @@ import {
         return {
           ...state,
           loading: false,
-          updateSuccess: action.payload.success,
-          product: action.payload.products,
+          updateSuccess: true,
+          product: action.payload.product,
         };
       case UPDATE_PRODUCT_FAIL:
         return {
