@@ -77,13 +77,12 @@ export default function Categories() {
     },
     beforeUpload: () => false,
     onChange: (info) => {
-      console.log(info, "info onchange")
+      console.log(info, "info onchange");
 
       const file = info.fileList[0]?.originFileObj; // Get the actual File/Blob object
 
-      console.log(file, "file onchange")
+      console.log(file, "file onchange");
       if (file) {
-
         const reader = new FileReader();
 
         reader.onload = (e) => {
@@ -152,7 +151,7 @@ export default function Categories() {
           <div className="flex justify-between items-center">
             <p className="text-2xl">Categories</p>
 
-            <Button type="primary" onClick={() => showModal()}>
+            <Button size="large" type="primary" onClick={() => showModal()}>
               + Create Category
             </Button>
 
