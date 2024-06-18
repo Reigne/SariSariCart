@@ -6,6 +6,8 @@ import {
 import { thunk } from "redux-thunk";
 import { composeWithDevTools } from "@redux-devtools/extension";
 
+import { registerUser, authReducer } from "./reducers/userReducers";
+
 import {
   createCategoryReducer,
   categoriesReducer,
@@ -23,6 +25,8 @@ import {
 } from "./reducers/productReducers";
 
 const reducer = combineReducers({
+  register: registerUser,
+  auth: authReducer,
   products: productsReducer,
   createProduct: createProductReducer,
   singleProduct: singleProductReducer,
