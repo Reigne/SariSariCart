@@ -128,23 +128,66 @@ export default function Products() {
       setFileList(newFileList);
     },
     beforeUpload: () => false,
-    onChange: (info) => {
-      console.log(info, "info onchange");
+    onChange: (e) => {
+      const files = e.fileList.map(file => file.originFileObj);
 
-      const file = info.fileList[0]?.originFileObj; // Get the actual File/Blob object
+      const imagePromises = files.map(file => {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = error => reject(error);
+          reader.readAsDataURL(file);
+        });
+      });
+    
+      Promise.all(imagePromises)
+        .then(images => {
+          setImages(images);
+          setFileList(e.fileList);
+        })
+        .catch(error => {
+          console.error('Error reading images:', error);
+        });
 
-      console.log(file, "file onchange");
-      if (file) {
-        const reader = new FileReader();
+      // console.log(info, "info onchange");
 
-        reader.onload = (e) => {
-          setImages((prevImages) => [...prevImages, e.target.result]);
-        };
+      // const file = info.fileList.originFileObj; // Get the actual File/Blob object
 
-        reader.readAsDataURL(file);
+      // console.log(file, "file onchange");
+      // if (file) {
 
-        setFileList(info.fileList); // Update fileList state
-      }
+      //   const reader = new FileReader();
+
+      //   reader.onload = (e) => {
+      //     setImages((prevImages) => [...prevImages, e.target.result]);
+      //   };
+
+      //   reader.readAsDataURL(file);
+
+      //   setFileList(info.fileList); // Update fileList state
+      // }
+
+      // console.log(info, "info onchange");
+
+      // const files = info.fileList.map((fileItem) => fileItem.originFileObj); // Get the actual File/Blob objects
+
+      // console.log(files, "files onchange");
+
+      // if (files.length) {
+      //   files.forEach((file) => {
+      //     const reader = new FileReader();
+
+      //     reader.onload = () => {
+      //       if (reader.readyState === 2) {
+      //         setImages((prevImages) => [...prevImages, reader.result]);
+      //       }
+      //     };
+
+      //     reader.readAsDataURL(file);
+      //   });
+
+      //   setFileList(info.fileList); // Update fileList state
+      // }
     },
   };
 
@@ -162,6 +205,8 @@ export default function Products() {
     images.forEach((image) => {
       formData.append("images", image);
     });
+
+    console.log(images, "images");
 
     // for (const [key, value] of formData.entries()) {
     //   console.log(`${key}: ${value}`);
