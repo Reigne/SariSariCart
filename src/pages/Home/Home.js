@@ -54,7 +54,7 @@ export default function Home() {
               {products?.map((product) => (
                 <a
                   key={product._id}
-                  className="w-full bg-white transition ease-in-out hover:-translate-y-1 hover:scale-105 duration-300 shadow-lg hover:border border-green-500 hover:shadow-green-500"
+                  className="w-full bg-white transition ease-in-out hover:-translate-y-1 hover:scale-105 duration-300 shadow-2xl hover:border border-green-500 hover:shadow-green-500"
                   href={`/product/${product._id}`}
                 >
                   <div className="p-2">
