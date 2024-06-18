@@ -51,7 +51,7 @@ export default function Home() {
         <div className="">
           {loading ? null : (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 grid-rows-auto gap-4 py-8">
-              {products.map((product) => (
+              {products?.map((product) => (
                 <a
                   key={product._id}
                   className="w-full bg-white transition ease-in-out hover:-translate-y-1 hover:scale-105 duration-300 shadow-lg hover:border border-green-500 hover:shadow-green-500"
