@@ -55,8 +55,13 @@ export const login = (userData) => async (dispatch) => {
       headers: {
         "Content-Type": "application/json",
       },
+      withCredentials: true,
     };
-    const { data } = await axios.post(`${process.env.REACT_APP_API}/api/v1/login`, userData, config);
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_API}/api/v1/login`,
+      userData,
+      config
+    );
 
     dispatch({
       type: LOGIN_SUCCESS,
