@@ -24,6 +24,8 @@ import {
   deleteProductReducer,
 } from "./reducers/productReducers";
 
+
+
 const reducer = combineReducers({
   register: registerUser,
   auth: authReducer,

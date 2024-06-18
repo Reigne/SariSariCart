@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { PrimeReactProvider, PrimeReactContext } from "primereact/api";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
+import ProtectedRoute from "./components/Route/ProtectedRoute";
+
 //pages
 import Home from "./pages/Home/Home";
 import Navbar from "./components/Navbar/Navbar";
@@ -11,8 +13,13 @@ import Login from "./pages/Login/Login";
 import Signup from "./pages/SignUp/Signup";
 import Products from "./pages/Product/Products";
 import Categories from "./pages/Category/Categories";
+import { loadUser } from "./actions/userActions";
+import store from "./store";
 
 export default function App() {
+  useEffect(() => {
+    store.dispatch(loadUser());
+  }, []);
   return (
     <div className="flex flex-col h-screen ">
       <Navbar />
@@ -21,7 +28,14 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/products" element={<Products />} />
+        <Route
+          path="/products"
+          element={
+            <ProtectedRoute>
+              <Products />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/categories" element={<Categories />} />
       </Routes>
     </div>
