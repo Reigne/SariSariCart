@@ -8,7 +8,7 @@ import { FaCartShopping } from "react-icons/fa6";
 
 export default function Navbar() {
   return (
-    <nav className="flex items-center justify-around flex-wrap  py-3 px-14">
+    <nav className="flex items-center justify-between flex-wrap py-3 container mx-auto">
       <a className="flex flex-col" href="/">
         <div className="flex flex-row items-center flex-shrink-0 gap-2">
           <img
@@ -20,7 +20,7 @@ export default function Navbar() {
           <div className="flex flex-col">
             <span className="font-extrabold text-3xl tracking-normal">
               <p className="">
-              <span className="text-green-500">SariSariCart</span>
+                <span className="text-green-500">SariSariCart</span>
               </p>
             </span>
             <span className="text-xs">“Your Doorstep Delights Delivered”</span>
@@ -49,10 +49,10 @@ export default function Navbar() {
       </div>
 
       <div className="flex flex-row space-x-4 items-center">
-        <div className="bg-green-100 rounded-full p-3 flex justify-center">
+        <a className="bg-green-100 rounded-full p-3 flex justify-center hover:scale-110 ease-in-out duration-300 ">
           {/* <a className="">Cart</a> */}
           <FaCartShopping size={14} color="#22c55e" />
-        </div>
+        </a>
         <div>
           {/* <Button
             size="large"
@@ -61,9 +61,9 @@ export default function Navbar() {
             Login
           </Button> */}
 
-          <div className="bg-green-500 py-2 px-8 rounded-full">
-            <span className="text-white">Login</span>
-          </div>
+          <Button size="large" type="primary" href="/login" shape="round">
+            Login
+          </Button>
         </div>
         {/* <div>
           <div className="border border-green-500 py-2 px-6 rounded-full">
