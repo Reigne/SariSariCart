@@ -57,13 +57,13 @@ export default function Home() {
                   className="w-full bg-white transition ease-in-out hover:-translate-y-1 hover:scale-105 duration-300 shadow-2xl hover:border border-green-500 hover:shadow-green-500"
                   href={`/product/${product._id}`}
                 >
-                  <div className="p-2">
+                  <div className="">
                     <img
                       src={
                         product?.images[0]?.url || "/images/product-default.png"
                       }
                       alt={product.name}
-                      className="object-cover  w-full  h-[18rem] rounded"
+                      className="object-cover w-full  h-[18rem]"
                     />
                   </div>
 
