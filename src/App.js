@@ -13,6 +13,8 @@ import Login from "./pages/Login/Login";
 import Signup from "./pages/SignUp/Signup";
 import Products from "./pages/Product/Products";
 import Categories from "./pages/Category/Categories";
+import ProductSingle from "./pages/Product/ProductSingle";
+
 import { loadUser } from "./actions/userActions";
 import store from "./store";
 
@@ -28,6 +30,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/product/:id" element={<ProductSingle />} />
         <Route
           path="/products"
           element={
