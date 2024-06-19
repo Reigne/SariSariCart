@@ -114,14 +114,13 @@ export default function ProductSingle() {
             <p className="text-zinc-600">{product.description}</p>
           </div>
 
-
           <div>
             <p className="text-3xl text-red-500 font-semibold">
               {formatPrice(product?.price)}
             </p>
           </div>
 
-          <div className="flex gap-4">
+          <div className="flex gap-4 items-center">
             <InputNumber
               size="large"
               className="w-20"
@@ -134,6 +133,8 @@ export default function ProductSingle() {
               ADD TO CART
             </Button>
           </div>
+
+          <p className="text-zinc-500">{product.stock} available stock</p>
 
           <Divider />
 
