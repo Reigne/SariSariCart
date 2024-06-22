@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Avatar, Button, Divider } from "antd";
+import { Avatar, Button, Divider, Image } from "antd";
 import {
   Disclosure,
   DisclosureButton,
@@ -22,27 +22,30 @@ export default function ProfileSidebar() {
 
   const { user, loading, isLogout } = useSelector((state) => state.auth);
 
-  useEffect(() => {}, []);
+  useEffect((
+
+  ) => {}, []);
 
   return (
-    <div className="bg-zinc-100 sticky top-0 w-64 p-6">
+    <div className="bg-zinc-100 sticky top-0 w-[20rem] p-6">
       {loading ? null : (
-        <div className="flex items-center gap-4  rounded-lg">
-          <div className="flex flex-col">
-            <div className="flex items-center flex-shrink-0 gap-3">
-              <img
+        <div className="flex-1 items-center gap-4 rounded-lg">
+          <div className="flex-1 flex-col">
+            <div className="flex flex-col items-center flex-shrink-0 gap-3">
+              <Image
                 src={user?.avatar?.url}
                 alt="SariSariCart Logo"
-                className="h-14 w-14 rounded-full"
+                className="h-22 w-22 rounded-full"
+                width={175}
               />
 
-              <div className="flex flex-col">
-                <span className="font-extrabold text-normal  tracking-normal">
+              <div className="flex flex-col items-center">
+                <span className="font-extrabold text-normal tracking-normal text-xl">
                   <span className="text-green-500">
                     {user.firstname} {user.lastname}
                   </span>
                 </span>
-                <span className="text-xs">{user.email}</span>
+                <span className="text-normal">{user.email}</span>
               </div>
             </div>
 

@@ -112,7 +112,16 @@ export default function Navbar() {
           {user ? (
             <Menu>
               <MenuButton className="inline-flex items-center gap-2 rounded-full bg-green-500 py-1.5 px-3 text-sm font-semibold text-white shadow-inner shadow-white/10 focus:outline-none hover:bg-green-700 open:bg-green-500/90 focus:outline-white">
-                <UserIcon className="w-8 h-8 p-1" />
+                {user?.avatar?.url ? (
+                  <img
+                    src={user?.avatar?.url}
+                    alt="SariSariCart Logo"
+                    className="h-8 w-8 rounded-full"
+                  />
+                ) : (
+                  <UserIcon className="w-8 h-8 p-1" />
+                )}
+
                 <span>{user.firstname + " " + user.lastname}</span>
                 <ChevronDownIcon className="w-4 h-4 fill-white/60" />
               </MenuButton>
@@ -129,10 +138,10 @@ export default function Navbar() {
                   className="w-52 origin-top-right rounded-xl bg-green-500/90 p-1 text-sm text-white focus:outline-none mt-1"
                 >
                   <MenuItem>
-                    <button className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 focus:bg-white/10">
+                    <a className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 focus:bg-white/10" href="/profile">
                       <UserIcon className="w-4 h-4 fill-white/30" />
                       Profile
-                    </button>
+                    </a>
                   </MenuItem>
                   <MenuItem>
                     <button className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 focus:bg-white/10">
