@@ -11,8 +11,10 @@ import {
   Rate,
   Spin,
   Carousel,
+  message,
 } from "antd";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+import { addItemToCart } from "../../actions/cartActions";
 
 export default function ProductSingle() {
   const dispatch = useDispatch();
@@ -23,6 +25,7 @@ export default function ProductSingle() {
   );
 
   const [activeSlide, setActiveSlide] = useState(0);
+  const [quantity, setQuantity] = useState(1);
   const carouselRef = React.useRef(null);
 
   useEffect(() => {
@@ -48,6 +51,14 @@ export default function ProductSingle() {
     setActiveSlide(index);
     carouselRef.current.goTo(index);
   };
+
+  const addToCart = () => {
+    dispatch(addItemToCart(id, quantity));
+
+    // console.log(quantity, "quantity");
+    message.success("Successfully added to your cart");
+  };
+  
 
   return (
     <div className="container mx-auto py-4">
@@ -127,9 +138,16 @@ export default function ProductSingle() {
               defaultValue={1}
               min={1}
               max={product.stock}
+              value={quantity}
+              onChange={(value) => setQuantity(value)}
             />
 
-            <Button size="large" type="primary" className="font-semibold">
+            <Button
+              size="large"
+              type="primary"
+              className="font-semibold"
+              onClick={() => addToCart()}
+            >
               ADD TO CART
             </Button>
           </div>
