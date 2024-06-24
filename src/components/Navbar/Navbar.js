@@ -24,6 +24,7 @@ export default function Navbar() {
   const navigate = useNavigate();
 
   const { user, loading, isLogout } = useSelector((state) => state.auth);
+  const { cartItems } = useSelector((state) => state.cart);
 
   useEffect(() => {
     if (isLogout) {
@@ -83,14 +84,17 @@ export default function Navbar() {
 
         <a
           className="relative inline-block  hover:scale-110 ease-in-out duration-300"
-          href=""
+          href="/cart"
         >
           <a className="bg-green-100 rounded-full p-3 flex justify-center">
             <FaCartShopping size={14} color="#22c55e" />
           </a>
-          <span className="absolute top-1 right-1 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-red-500 rounded-full">
-            1
-          </span>
+
+          {cartItems.length > 0 && (
+            <span className="absolute top-1 right-1 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-red-500 rounded-full">
+              {cartItems.length}
+            </span>
+          )}
         </a>
         {/* 
         <Badge count={1}>
@@ -135,17 +139,20 @@ export default function Navbar() {
               >
                 <MenuItems
                   anchor="bottom end"
-                  className="w-52 origin-top-right rounded-xl bg-green-500/90 p-1 text-sm text-white focus:outline-none mt-1"
+                  className="w-52 origin-top-right rounded-xl bg-green-500/90 p-1 text-sm text-white focus:outline-none mt-1 space-y-1"
                 >
                   <MenuItem>
-                    <a className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 focus:bg-white/10" href="/profile">
-                      <UserIcon className="w-4 h-4 fill-white/30" />
+                    <a
+                      className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 focus:bg-white/10"
+                      href="/profile"
+                    >
+                      <UserIcon className="w-4 h-4 fill-white/60" />
                       Profile
                     </a>
                   </MenuItem>
                   <MenuItem>
                     <button className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 focus:bg-white/10">
-                      <BsBoxSeamFill className="w-4 h-4 fill-white/30" />
+                      <BsBoxSeamFill className="w-4 h-4 fill-white/60" />
                       My Orders
                     </button>
                   </MenuItem>
@@ -155,7 +162,7 @@ export default function Navbar() {
                       className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 focus:bg-white/10"
                       onClick={() => logoutHandler()}
                     >
-                      <ArrowLeftStartOnRectangleIcon className="w-4 h-4 fill-white/30" />
+                      <ArrowLeftStartOnRectangleIcon className="w-4 h-4 fill-white/60" />
                       Logout
                     </button>
                   </MenuItem>
