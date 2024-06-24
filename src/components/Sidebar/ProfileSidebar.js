@@ -15,7 +15,11 @@ import { HiOutlinePresentationChartBar } from "react-icons/hi2";
 import { LiaTruckLoadingSolid } from "react-icons/lia";
 import { FaRegStar } from "react-icons/fa";
 import { PiUsersThree } from "react-icons/pi";
-
+import {
+  UserIcon,
+} from "@heroicons/react/16/solid";
+import { FaRegUser } from "react-icons/fa6";
+import { SlUser } from "react-icons/sl";
 export default function ProfileSidebar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -54,7 +58,7 @@ export default function ProfileSidebar() {
             <div className="space-y-4">
               <div className="hover:bg-green-500 hover:text-white py-2 px-3 rounded cursor-pointer w-full flex flex-1 flex-row justify-between items-center">
                 <div className="flex items-center gap-4">
-                  <HiOutlinePresentationChartBar color="#0f172a" size={20} />
+                  <SlUser color="#0f172a" size={20} />
 
                   <span className="">Profile</span>
                 </div>
