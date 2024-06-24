@@ -15,6 +15,8 @@ import Products from "./pages/Product/Products";
 import Categories from "./pages/Category/Categories";
 import ProductSingle from "./pages/Product/ProductSingle";
 import Profile from "./pages/Profile/Profile";
+import Cart from "./pages/Cart/Cart";
+import Checkout from "./pages/Cart/Checkout";
 
 import { loadUser } from "./actions/userActions";
 import store from "./store";
@@ -42,6 +44,8 @@ export default function App() {
         />
         <Route path="/categories" element={<Categories />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout />} />
       </Routes>
     </div>
   );
