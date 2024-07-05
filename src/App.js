@@ -37,9 +37,9 @@ export default function App() {
         <Route
           path="/products"
           element={
-            <ProtectedRoute>
+            // <ProtectedRoute>
               <Products />
-            </ProtectedRoute>
+            // </ProtectedRoute>
           }
         />
         <Route path="/categories" element={<Categories />} />
