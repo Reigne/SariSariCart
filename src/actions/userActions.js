@@ -87,6 +87,7 @@ export const loadUser = () => async (dispatch) => {
         withCredentials: true,
       }
     );
+    
     dispatch({
       type: LOAD_USER_SUCCESS,
       payload: data.user,
@@ -101,17 +102,18 @@ export const loadUser = () => async (dispatch) => {
 
 export const Logout = () => async (dispatch) => {
   try {
-    await axios.get(`${process.env.REACT_APP_API}/api/v1/logout`);
+    await axios.get(`${process.env.REACT_APP_API}/api/v1/logout`, { withCredentials: true });
     dispatch({
       type: LOGOUT_SUCCESS,
     });
   } catch (error) {
     dispatch({
-      type: LOGIN_FAIL,
+      type: LOGOUT_FAIL,
       payload: error.response.data.message,
     });
   }
 };
+
 
 export const updateProfile = (userData) => async (dispatch) => {
   try {
