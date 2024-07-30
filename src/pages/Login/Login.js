@@ -71,7 +71,7 @@ export default function Login() {
               className="h-[32em] w-[32rem]"
             />
           </div>
-          <form className="space-y-8 min-w-[30rem] sm:p-0 p-4">
+          <form className="space-y-8 min-w-[30rem] sm:p-0 p-4" onSubmit={() => loginHandler()}>
             <div className="flex flex-col items-center justify-center space-y-2">
               <p className="text-6xl font-extrabold text-green-500">
                 SariSariCart
