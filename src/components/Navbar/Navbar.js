@@ -36,6 +36,7 @@ export default function Navbar() {
     dispatch(Logout());
     navigate("/");
   };
+  
   return (
     <nav className="flex items-center justify-between flex-wrap py-3 container mx-auto">
       <a className="flex flex-col" href="/">
@@ -151,10 +152,13 @@ export default function Navbar() {
                     </a>
                   </MenuItem>
                   <MenuItem>
-                    <button className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 focus:bg-white/10">
+                    <a
+                      className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 focus:bg-white/10"
+                      href="/my-orders"
+                    >
                       <BsBoxSeamFill className="w-4 h-4 fill-white/60" />
                       My Orders
-                    </button>
+                    </a>
                   </MenuItem>
                   <div className="my-1 h-px bg-white/5" />
                   <MenuItem>
