@@ -9,6 +9,7 @@ import {
   TrashIcon,
   XMarkIcon,
 } from "@heroicons/react/16/solid";
+import { TbShoppingCartOff } from "react-icons/tb";
 
 export default function Cart() {
   const dispatch = useDispatch();
@@ -62,71 +63,90 @@ export default function Cart() {
           ]}
         />
       </div>
-      <div className="flex flex-row gap-4">
-        <div className="w-9/12 col-span-2 bg-zinc-100 p-8 space-y-6">
-          <div className="flex flex-1 flex-row gap-4">
-            <div className="w-2/5 flex items-center justify-center">
-              <p>Products</p>
+
+      {cartItems.length === 0 ? (
+        <div className="flex-1 flex justify-center items-center">
+          <div className="flex flex-col justify-center items-center gap-6">
+            <img src="./images/empty-cart-2.png" width={380} />
+
+            <div className="flex flex-col justify-center items-center">
+              <p className="text-xl font-bold text-green-500">
+                Your cart is empty
+              </p>
+              <p className="">Add something to make me happy</p>
             </div>
 
-            <div className="w-1/6 flex items-center justify-center">
-              <p>Price</p>
-            </div>
-
-            <div className="w-1/6 flex items-center justify-center">
-              <p>Quantity</p>
-            </div>
-
-            <div className="w-1/6 flex items-center justify-center">
-              <p>Total</p>
-            </div>
-
-            <div className="w-4 flex items-center justify-center"></div>
+            <Button type="primary" size="large" href="/">
+              Back to Products
+            </Button>
           </div>
-
-          <Divider />
-
-          {cartItems.map((item) => (
+        </div>
+      ) : (
+        <div className="flex flex-row gap-4">
+          <div className="w-9/12 col-span-2 bg-zinc-100 p-8 space-y-6">
             <div className="flex flex-1 flex-row gap-4">
-              <div className="w-2/5 flex flex-row gap-4">
-                <img
-                  src={item.image}
-                  alt={item.image}
-                  className="h-24 w-24 rounded object-cover"
-                />
-
-                <div className="flex flex-col">
-                  <div>
-                    <p className="font-semibold">{item.name}</p>
-                  </div>
-
-                  <div>
-                    <p className="text-zinc-500 text-sm">
-                      {item.category.name}
-                    </p>
-                  </div>
-
-                  {/* <div>
-                  <p className="text-zinc-500 text-sm">{item.description}</p>
-                </div> */}
-                </div>
+              <div className="w-2/5 flex items-center justify-center">
+                <p>Products</p>
               </div>
 
               <div className="w-1/6 flex items-center justify-center">
-                <p>₱{item.price}</p>
+                <p>Price</p>
               </div>
 
-              <div className="w-1/6 flex flex-row items-center justify-center gap-2">
-                <a
-                  className="cursor-pointer"
-                  onClick={() =>
-                    increaseQty(item.product, item.quantity, item.stock)
-                  }
-                >
-                  <PlusIcon color="#22c55e" className="w-4 h-4" />
-                </a>
+              <div className="w-1/6 flex items-center justify-center">
+                <p>Quantity</p>
+              </div>
 
-                {/* <Input
+              <div className="w-1/6 flex items-center justify-center">
+                <p>Total</p>
+              </div>
+
+              <div className="w-4 flex items-center justify-center"></div>
+            </div>
+
+            <Divider />
+
+            {cartItems.map((item) => (
+              <div className="flex flex-1 flex-row gap-4">
+                <div className="w-2/5 flex flex-row gap-4">
+                  <img
+                    src={item.image}
+                    alt={item.image}
+                    className="h-24 w-24 rounded object-cover"
+                  />
+
+                  <div className="flex flex-col">
+                    <div>
+                      <p className="font-semibold">{item.name}</p>
+                    </div>
+
+                    <div>
+                      <p className="text-zinc-500 text-sm">
+                        {item.category.name}
+                      </p>
+                    </div>
+
+                    {/* <div>
+                  <p className="text-zinc-500 text-sm">{item.description}</p>
+                </div> */}
+                  </div>
+                </div>
+
+                <div className="w-1/6 flex items-center justify-center">
+                  <p>₱{item.price}</p>
+                </div>
+
+                <div className="w-1/6 flex flex-row items-center justify-center gap-2">
+                  <a
+                    className="cursor-pointer"
+                    onClick={() =>
+                      increaseQty(item.product, item.quantity, item.stock)
+                    }
+                  >
+                    <PlusIcon color="#22c55e" className="w-4 h-4" />
+                  </a>
+
+                  {/* <Input
                   size="large"
                   className="w-20"
                   defaultValue={1}
@@ -136,95 +156,96 @@ export default function Cart() {
                   // onChange={(value) => setQuantity(value)}
                 /> */}
 
-                <div className="p-2 bg-white border">
-                  <p>{item.quantity}</p>
+                  <div className="p-2 bg-white border">
+                    <p>{item.quantity}</p>
+                  </div>
+
+                  <a
+                    className="cursor-pointer"
+                    onClick={() => decreaseQty(item.product, item.quantity)}
+                  >
+                    <MinusIcon color="#ef4444" className="w-4 h-4" />
+                  </a>
+                </div>
+
+                <div className="w-1/6 flex items-center justify-center">
+                  <p>₱{item.price}</p>
                 </div>
 
                 <a
-                  className="cursor-pointer"
-                  onClick={() => decreaseQty(item.product, item.quantity)}
+                  className="w-4 flex items-center justify-center"
+                  onClick={() => removeCartItemHandler(item.product)}
                 >
-                  <MinusIcon color="#ef4444" className="w-4 h-4" />
+                  <XMarkIcon color="#ef4444" />
                 </a>
               </div>
+            ))}
 
-              <div className="w-1/6 flex items-center justify-center">
-                <p>₱{item.price}</p>
+            <Divider />
+          </div>
+
+          <div className="w-3/12 bg-zinc-100 p-8 space-y-6 h-fit">
+            <div>
+              <p className="text-2xl font-semibold">Summary</p>
+            </div>
+
+            <div className="flex flex-col space-y-4">
+              <div className="flex flex-row justify-between items-center">
+                <p>Total Products:</p>
+
+                <p>
+                  ₱
+                  {cartItems
+                    .reduce((acc, item) => acc + item.quantity * item.price, 0)
+                    .toFixed(2)}
+                </p>
               </div>
 
-              <a
-                className="w-4 flex items-center justify-center"
-                onClick={() => removeCartItemHandler(item.product)}
+              <div className="flex flex-row justify-between items-center">
+                <p>Subtotal Products:</p>
+
+                <span>
+                  {cartItems.reduce(
+                    (acc, item) => acc + Number(item.quantity),
+                    0
+                  )}{" "}
+                  (Items)
+                </span>
+              </div>
+
+              <div className="flex flex-row justify-between items-center">
+                <p>Shipping Costs:</p>
+
+                <p>Free</p>
+              </div>
+            </div>
+
+            <Divider />
+
+            <div className="flex flex-col gap-4">
+              <div className="flex flex-row justify-between items-center">
+                <p>Total Products:</p>
+
+                <p>
+                  ₱
+                  {cartItems
+                    .reduce((acc, item) => acc + item.quantity * item.price, 0)
+                    .toFixed(2)}
+                </p>
+              </div>
+
+              <Button
+                type="primary"
+                size="large"
+                block
+                onClick={() => checkoutHandler()}
               >
-                <XMarkIcon color="#ef4444" />
-              </a>
+                CHECKOUT
+              </Button>
             </div>
-          ))}
-
-          <Divider />
-        </div>
-
-        <div className="w-3/12 bg-zinc-100 p-8 space-y-6 h-fit">
-          <div>
-            <p className="text-2xl font-semibold">Summary</p>
-          </div>
-
-          <div className="flex flex-col space-y-4">
-            <div className="flex flex-row justify-between items-center">
-              <p>Total Products:</p>
-
-              <p>
-                ₱
-                {cartItems
-                  .reduce((acc, item) => acc + item.quantity * item.price, 0)
-                  .toFixed(2)}
-              </p>
-            </div>
-
-            <div className="flex flex-row justify-between items-center">
-              <p>Subtotal Products:</p>
-
-              <span>
-                {cartItems.reduce(
-                  (acc, item) => acc + Number(item.quantity),
-                  0
-                )}{" "}
-                (Items)
-              </span>
-            </div>
-
-            <div className="flex flex-row justify-between items-center">
-              <p>Shipping Costs:</p>
-
-              <p>Free</p>
-            </div>
-          </div>
-
-          <Divider />
-
-          <div className="flex flex-col gap-4">
-            <div className="flex flex-row justify-between items-center">
-              <p>Total Products:</p>
-
-              <p>
-                ₱
-                {cartItems
-                  .reduce((acc, item) => acc + item.quantity * item.price, 0)
-                  .toFixed(2)}
-              </p>
-            </div>
-
-            <Button
-              type="primary"
-              size="large"
-              block
-              onClick={() => checkoutHandler()}
-            >
-              CHECKOUT
-            </Button>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
