@@ -27,7 +27,16 @@ import {
   updateProductReducer,
   deleteProductReducer,
 } from "./reducers/productReducers";
+
+import {
+  newOrderReducer,
+  orderDetailsReducer,
+  updateOrderReducer,
+  myOrdersReducer,
+} from "./reducers/orderReducers";
+
 import { cartReducer } from "./reducers/cartReducers";
+
 const reducer = combineReducers({
   cart: cartReducer,
   register: registerUser,
@@ -43,6 +52,10 @@ const reducer = combineReducers({
   singleCategory: singleCategoryReducer,
   updateCategory: updateCategoryReducer,
   deleteCategory: deleteCategoryReducer,
+  newOrder: newOrderReducer,
+  orderDetails: orderDetailsReducer,
+  updateOrder: updateOrderReducer,
+  myOrders: myOrdersReducer,
 });
 
 let initialState = {
